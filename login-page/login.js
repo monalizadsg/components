@@ -3,7 +3,7 @@ var users = [
   {
     userId: "1",
     email: "mona@gmail.com",
-    password: "test01",
+    password: "heytest01",
   },
   {
     userId: "2",
@@ -24,11 +24,16 @@ function handleLogin() {
   const validEmail = validateEmail(email);
   const validPassword = validatePassword(password);
 
-  if (email === "" || password === "") return null;
   if (validEmail && validPassword) {
-    console.log("valid email and password!");
+    console.log({ email, password });
+    for (let entry of Object.entries(users)) {
+      let userEmail = entry[1].email;
+      let userPassword = entry[1].password;
+      if (email === userEmail && password === userPassword)
+        alert("successful login");
+    }
   }
-  return false;
+  alert("no login details found. create an account first");
 }
 
 function validateEmail(email) {

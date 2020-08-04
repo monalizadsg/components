@@ -21,19 +21,20 @@ function handleLogin() {
   const email = document.querySelector("#email").value;
   const password = document.querySelector("#password").value;
   console.log({ email, password });
+
   const validEmail = validateEmail(email);
   const validPassword = validatePassword(password);
 
   if (validEmail && validPassword) {
-    console.log({ email, password });
-    for (let entry of Object.entries(users)) {
-      let userEmail = entry[1].email;
-      let userPassword = entry[1].password;
-      if (email === userEmail && password === userPassword)
-        alert("successful login");
-    }
+    //check if the email and password input match the users
+    const foundUser = users.find(
+      (elem) => elem.email === email && elem.password === password
+    );
+    console.log(foundUser);
+    alert("Successful login");
+  } else {
+    alert("no login details found. create an account first");
   }
-  alert("no login details found. create an account first");
 }
 
 function validateEmail(email) {

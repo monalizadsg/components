@@ -1,10 +1,11 @@
 import React from "react";
 import "./App.css";
+import ValidatedLoginForm from "./ValidatedLoginForm";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">hello</header>
+      <ValidatedLoginForm />
     </div>
   );
 }

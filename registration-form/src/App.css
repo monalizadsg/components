@@ -4,7 +4,6 @@
 .container-wrapper {
   width: 450px;
   margin: auto;
-  border: red solid 1px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,4 +35,14 @@ label {
 .text-right {
   align-self: flex-end;
   margin-top: 10px;
+}
+
+@media only screen and (max-width: 450px) {
+  .container-wrapper {
+    width: 100%;
+  }
+  .form-container {
+    width: 80vw;
+    margin: auto;
+  }
 }

@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
 import { Formik, Form, Field } from "formik";
-import * as EmailValidator from "email-validator";
-// import * as Yup from "yup";
+// import * as EmailValidator from "email-validator";
+import * as Yup from "yup";
 
 const ValidatedLoginForm = () => {
   return (
@@ -19,27 +19,39 @@ const ValidatedLoginForm = () => {
             setSubmitting(false);
           }, 500);
         }}
-        // validate using email-validator for practice only
-        validate={(values) => {
-          let errors = {};
-          if (!values.email) {
-            errors.email = "Required";
-          } else if (!EmailValidator.validate(values.email)) {
-            errors.email = "Invalid email address";
-          }
+        // // validate using email-validator for practice only
+        // validate={(values) => {
+        //   let errors = {};
+        //   if (!values.email) {
+        //     errors.email = "Required";
+        //   } else if (!EmailValidator.validate(values.email)) {
+        //     errors.email = "Invalid email address";
+        //   }
 
-          const passwordRegex = /(?=.*[0-9])/;
-          if (!values.password) {
-            errors.password = "Required";
-          } else if (values.password.length < 8) {
-            errors.password = "Password must be atleast 8 characters long";
-          } else if (!passwordRegex.test(values.password)) {
-            errors.password =
-              "Invalid password. Must contain atleast one number";
-          }
+        //   const passwordRegex = /(?=.*[0-9])/;
+        //   if (!values.password) {
+        //     errors.password = "Required";
+        //   } else if (values.password.length < 8) {
+        //     errors.password = "Password must be atleast 8 characters long";
+        //   } else if (!passwordRegex.test(values.password)) {
+        //     errors.password =
+        //       "Invalid password. Must contain atleast one number";
+        //   }
 
-          return errors;
-        }}
+        //   return errors;
+        // }}
+
+        //Using Yup library
+        validationSchema={Yup.object().shape({
+          email: Yup.string().email().required("Required"),
+          password: Yup.string()
+            .required("No password provided.")
+            .min(
+              8,
+              "Password is too short - should be atleast 8 characters mininmum."
+            )
+            .matches(/(?=.*[0-9])/, "Password must contain a number."),
+        })}
       >
         {(props) => {
           const {
